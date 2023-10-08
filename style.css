@@ -1,6 +1,31 @@
-body{
-    margin: 0;
+body {
+    margin: 0px;
+
 }
-.new{
-    background-color: cadetblue;
+
+.content {
+    min-height: 100vh;
+    background-color: cadetblue !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quest-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.quiz-card {
+    width: 30rem;
+}
+
+.quiz-answer-card {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.15);
+}
+.bg-success, bg-danger{
+    color: white;
 }
