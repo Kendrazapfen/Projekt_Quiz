@@ -27,11 +27,18 @@
 
     <div class="content">
         <div class="card quiz-card">
-            <img src="img/bg b.png" class="card-img-top" alt="brain">
-            
+            <img src="img/bg b.png" id="header-image" class="card-img-top" alt="brain">
+            <div class="progress">
+                <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+              </div>
             <div class="card-body" id="end-screen" style="display: none;">
-                Quiz beendet!
+                <div class="text-center final-headline">Quiz beendet!</div>
+                
+                
+                
+                <div class="text-center"> Du hast <b id="amount-of-right-questions">XXX</b> von <b id="amount-of-questions">XXX</b> Fragen richtig beantwortet.</div>
             </div>
+
             <div class="card-body" id="question-body">
                 <h5 class="card-title" id="questiontext">Frage 1</h5>
                 <p class="card-text"></p>
