@@ -1,16 +1,16 @@
-let rightQuestions = 0;
-let currentQuestion = 0;
+let rightQuestions = 0;     //ordnet der Variablen rightQuestion den Wert 0 zu
+let currentQuestion = 0;    //ordnet der Variablen currentQuestion den Wert 0 zu
 
-let AUDIO_SUCCESS = new Audio('audio/win.mp3');
+let AUDIO_SUCCESS = new Audio('audio/lost.mp3');
 let AUDIO_FAIL = new Audio('audio/lost.mp3');
 
 function init() {
-    document.getElementById('all-questions').innerHTML = questions.length;
-    showQuestion();
+    document.getElementById('all-questions').innerHTML = questions.length;      //sucht die ID im html, ersetzt die Gesamtanzahl an Fragen mit der Länge/Azahl der Elemente des JSON
+    showQuestion(); 
 }
 
 function showQuestion() {
-    if (gameIsOver()) {
+    if (gameIsOver()) { //die Bedingung gameIsOver ist ausgelagert als Funktion
         showEndScreen();
     } else {
         updateToNextQuestion();
@@ -18,25 +18,27 @@ function showQuestion() {
 }
 
 function gameIsOver(){
-    return currentQuestion >= questions.length;
+    return currentQuestion >= questions.length;//Bedingung für den if Teil der shoWQuestion - Funktion; gibt zurück ob aktuelle Frage die Letzte im JSON ist
 }
-function answer(selection) {
-    let question = questions[currentQuestion];
-    let selectedQuestionnumber = selection.slice(-1);
-    let idOfRightAnswer = `answer_${question['right_answer']}`;
+function answer(i) {    //die Funktion hat den Parameter selection
+    let rightAnswer = questions[currentQuestion]['right_answer'];
+    let question = questions[currentQuestion];// die Variable wird der aktuellen Stelle im JSON questions zugewiesen
+    //let selectedQuestionnumber = selection.slice(-1); //dem Parameter wird der gefundenen/geschnittene Teil des arrays zugewiesen
+    let idOfRightAnswer = `answer_${question['right_answer']}`; //die Variable erhält dadurch den Wert/Nummer der jeweils richtigen Antwort
 
-    if (selectedQuestionnumber == question['right_answer']) {
-        document.getElementById(selection).parentNode.classList.add('bg-success');
+    if (rightAnswerSelected(i)) { //wenn die Variable tatsächlich den gleichen Wert wie die richtigen Antwort hat, dann...
+        document.getElementById(`answer_${i}`).parentNode.classList.add('bg-success'); //klickt man die richtige Antwort an, wird sie grün; d.h. sie bekommt einen anderen css style
         AUDIO_SUCCESS.play();
-        rightQuestions++;
-        stopPointerAction();
+        rightQuestions++; //erhöt die Variable jeweils um eine Stelle (wie plus 1)
+        
     }
     else {
-        document.getElementById(selection).parentNode.classList.add('bg-danger');
-        document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
-        stopPointerAction();
+        document.getElementById(`answer_${i}`).parentNode.classList.add('bg-danger');//klickt man die falsche Antwort an, wird sie rot
+        //document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
+        document.getElementById(`answer_${rightAnswer}`).parentNode.classList.add('bg-success');
         AUDIO_FAIL.play();
     };
+    disabledAnswer();
     document.getElementById('next-button').disabled = false;
 }
 
@@ -92,9 +94,14 @@ function updateProgressBar(){
     document.getElementById('progress-bar').innerHTML = `${percent} %`;
     document.getElementById('progress-bar').style = `width: ${percent}%;`;
 }
-function stopPointerAction() {
-    document.getElementById('answer_1').style.pointerEvents= "none";
-    document.getElementById('answer_2').style.pointerEvents= "none";
-    document.getElementById('answer_3').style.pointerEvents= "none";
-    document.getElementById('answer_4').style.pointerEvents= "none";
+
+function rightAnswerSelected(i){
+    let rightAnswer = questions[currentQuestion]['right_answer'];   
+    return i == rightAnswer;
+}
+
+function disabledAnswer(){
+    for (let i  = 1; i  <= 4; i ++) {
+        document.getElementById(`answer_${i}`).parentNode.onclick = null;
+        }
 }
