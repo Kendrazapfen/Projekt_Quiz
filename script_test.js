@@ -3,7 +3,7 @@ let rightQuestion = 0;//ordnet der Variablen rightQuestion den Wert 0 zu
 
 let audio_success = new Audio('audio/sound1.mp3');
 let audio_fail = new Audio('audio/lost.mp3');
-
+let audio_endGame = new Audio('audio/win.mp3');
 
 function init() {
     document.getElementById('max-questions').innerHTML = questions.length;//sucht die ID im html, ersetzt die Gesamtanzahl an Fragen mit der Länge/Azahl der Elemente des JSON
@@ -49,6 +49,7 @@ function endQuiz() {
     document.getElementById('questionBody').style = 'display: none';//die davor liegenden werden ausgeblendet
     document.getElementById('amount-of-questions').innerHTML = questions.length;//die Gesamt-Fragenanzahl unten ist gleich der Länge des JSON
     document.getElementById('amount-of-right-questions').innerHTML = rightQuestion;//die Anzahl der richtigen Antworten wird ausgegeben
+    audio_endGame.play();
 }
 
 function rightAnswerSelected(i) {//zählt die richtigen Antworten mit
