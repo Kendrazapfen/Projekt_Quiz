@@ -109,7 +109,7 @@ h3 {
 }
 
 .fullimg {
-    background-image: url('../img/brainbg.jpg');
+    background-image: url('/modul_7/quiz_app/img/brainbg.jpg');
     height: 50vh;
     background-size: cover;
     background-position: center;
