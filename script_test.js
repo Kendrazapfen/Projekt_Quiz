@@ -1,9 +1,10 @@
 let currentQuestion = 0; //ordnet der Variablen currentQuestion den Wert 0 zu
 let rightQuestion = 0;//ordnet der Variablen rightQuestion den Wert 0 zu
-
 let audio_success = new Audio('audio/sound1.mp3');
 let audio_fail = new Audio('audio/lost.mp3');
 let audio_endGame = new Audio('audio/win.mp3');
+audio_success.volume = 0.1;
+audio_fail.volume = 0.1;
 
 function init() {
     document.getElementById('max-questions').innerHTML = questions.length;//sucht die ID im html, ersetzt die Gesamtanzahl an Fragen mit der Länge/Azahl der Elemente des JSON
@@ -24,6 +25,13 @@ function gameIsOver() {
 
 function answer(i) {
     let rightAnswer = questions[currentQuestion]['right_answer'];
+    answerIfElse(i, rightAnswer);
+    updateProgressBar();
+    disabledAnswer()
+    document.getElementById('next-button').disabled = false;//solange wie keine Antwort angeklickt ist, erscheint der button grau und kann nicht angeklickt werden
+}
+
+function answerIfElse(i, rightAnswer) {
     if (rightAnswerSelected(i)) {//wenn die Variable tatsächlich den gleichen Wert wie die richtigen Antwort hat, dann...
         document.getElementById(`answer_${i}`).parentNode.classList.add('bg-success');//klickt man die richtige Antwort an, wird sie grün; d.h. sie bekommt einen anderen css style
         audio_success.play();
@@ -33,16 +41,12 @@ function answer(i) {
         audio_fail.play();
         document.getElementById(`answer_${rightAnswer}`).parentNode.classList.add('bg-success');
     }
-    updateProgressBar();
-    disabledAnswer()
-    document.getElementById('next-button').disabled = false;//solange wie keine Antwort angeklickt ist, erscheint der button grau und kann nicht angeklickt werden
 }
 
 function startQuiz() {
     document.getElementById('quizContainer').classList.remove('d-none');//erste Seite des Quizzes erscheint, weil die dahinter nicht erscheinen
     document.getElementById('startQuiz').classList.add('d-none');//die Startseite wird ausgeblendet
 }
-
 
 function endQuiz() {
     document.getElementById('endScreen').style = '';//die letzte Seite des Quizzes erscheint
@@ -55,6 +59,7 @@ function endQuiz() {
 function rightAnswerSelected(i) {//zählt die richtigen Antworten mit
     let rightAnswer = questions[currentQuestion]['right_answer'];
     return i == rightAnswer;
+
 }
 
 function updateProgressBar() {//macht den Fortschrittsanzeige
@@ -89,12 +94,14 @@ function resetButton(i) {//Zurücksetzen der buttons
 function disabledAnswer() {//macht die anderen Antwortmöglichkeiten aus, wenn etwas angeklickt wurde
     for (let i = 1; i <= 4; i++) {
         document.getElementById(`answer_${i}`).parentNode.onclick = null;
+        document.getElementById('next-button').style = 'cursor: pointer';
     }
 }
 
 function enableAnswer() {
     for (let i = 1; i <= 4; i++) {
         document.getElementById(`answer_${i}`).parentNode.onclick = function () { answer(i) };
+        document.getElementById('next-button').style = 'cursor: not-allowed !important';
     }
 }
 

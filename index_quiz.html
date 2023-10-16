@@ -32,10 +32,9 @@
                 <div class="col-md-4 sidebar">
                     <img src="img/logo.png">
                     <div class="sidebartop">
-                       
+
                     </div>
                 </div>
-
 
                 <div class="col-md-8">
                     <div id="quizContainer">
@@ -68,15 +67,13 @@
 
                         <div class="card-body fullimg" id="startScreen">
                             <div class="text-center final-headline">
-                               <b>Willkommen zu einem kleinen Quiz!</b>
+                                <b>Willkommen zu einem kleinen Quiz!</b>
                             </div>
 
                             <div class="button-row">
                                 <button class="btn btn-primary btn-lg" onclick="startGame()">Spiel starten</button>
                             </div>
                         </div>
-
-
                         <div class="card-body" id="questionBody" style="display: none;">
                             <h5 class="card-title" id="questiontext">Frage</h5>
 
@@ -110,24 +107,20 @@
                                 </div>
                             </div>
 
-                            <div class="question-footer ">
+                            <div class="question-footer">
                                 <span>
                                     <b id="question">1</b> von <b id="max-questions">5</b> Fragen
                                 </span>
-
-                                <button class="btn btn-primary btn-lg" id="next-button" disabled
-                                    onclick="nextQuestion()">Nächste Frage</button>
+                                <div class="cursor-not-allowed">
+                                    <button class="btn btn-primary btn-lg" id="next-button" disabled
+                                        onclick="nextQuestion()">Nächste Frage</button>
+                                </div>
                             </div>
                         </div>
-
                     </div>
-
-
-
                 </div>
             </div>
         </div>
-
 </body>
 
 </html>
