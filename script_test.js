@@ -1,10 +1,11 @@
 let currentQuestion = 0; //ordnet der Variablen currentQuestion den Wert 0 zu
 let rightQuestion = 0;//ordnet der Variablen rightQuestion den Wert 0 zu
-let audio_success = new Audio('audio/sound1.mp3');
-let audio_fail = new Audio('audio/lost.mp3');
-let audio_endGame = new Audio('audio/win.mp3');
+let audio_success = new Audio('audio/horn.mp3');
+let audio_fail = new Audio('audio/failfare.mp3');
+let audio_endGame = new Audio('audio/kazoo.mp3');
 audio_success.volume = 0.1;
 audio_fail.volume = 0.1;
+audio_endGame.volume = 0.05;
 
 function init() {
     document.getElementById('max-questions').innerHTML = questions.length;//sucht die ID im html, ersetzt die Gesamtanzahl an Fragen mit der Länge/Azahl der Elemente des JSON
